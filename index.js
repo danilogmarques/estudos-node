@@ -1,10 +1,12 @@
 const { Person } = require('./person');
-const dotenv = require('dotenv');
-const conectToDatabase = require('./src/database/connect');
+require('dotenv').config();
 
-dotenv.config();
+const connectToDatabase = require('./src/database/connect');
 
-conectToDatabase();
+connectToDatabase().catch((error) => {
+    console.error('Error connecting to the database:', error.message);
+    process.exitCode = 1;
+});
 
 
 // require('./modules/http');
